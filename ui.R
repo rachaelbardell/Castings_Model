@@ -4,7 +4,7 @@ library(shiny)
 # Define UI for castings model application
 # have to have headerPanel(), sidebarPanel(), and mainPanel()
 shinyUI(pageWithSidebar(
-        headerPanel("Castings Model"),
+       headerPanel("Castings Model"),
         
         # Sidebar with controls to choose a variable to plot against price and filtering options
         sidebarPanel(
@@ -37,11 +37,11 @@ shinyUI(pageWithSidebar(
                                                # haven't finished these...
                                                )),
           
-          checkboxInput("rsf", "Filter by RSF", value = TRUE)
-          
+          selectInput("rsf", "Filter by RSF?", list("Do Not Filter by RSF", "F", "R"))
+         
         ),
         
-        mainPanel( # something is wrong with this part I think, neither of these show up. and R has to terminate and restart every time... annoying. But there is not an error with the plot which is good
+        mainPanel(
           h3(textOutput("caption")),
           plotOutput("Plot")
           )
