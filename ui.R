@@ -17,46 +17,43 @@ shinyUI(pageWithSidebar(
         
         # Sidebar with controls to choose a variable to plot against price and filtering options
         sidebarPanel(
-          selectInput("variable", "Variable:", list("Box Volume"="boxvol", # 9622
-                                                    "Depth"="depth", # 6408
-                                                    "Height"="height", # 7630
-                                                    "Width"="width", # 7137
-                                                    "Weight"="weight", # 8663
-                                                    "Core Volume"="corevol", # 10073
-                                                    "Number of Ports"="ports", # integer 13
-                                                    "Port Volume"="portvol", # 210?
-                                                    "Balance"="balance", # 19
-                                                    "Surface Area"= "surfacea", # 10074
-                                                    "Parting Line Perimeter"="partinglineperim", # 8724
-                                                    "Drill Holes"= "drillholes", # integer 136
-                                                    "Drill Hole Volume"="drillholevol", # 6318
+          selectInput("variable", "Variable:", list("Air Pressure Test" = "pressuretestair", # integer 40
                                                     "Assembly"="is_assembly", # logical 2
-                                                    "Ex Gear Count"="exgearcount", # integer 6
-                                                    "Water Pressure Test"="pressuretestwater", # integer 26
-                                                    "Air Pressure Test" = "pressuretestair", # integer 40
-                                                    "Mold Complexity" = "moldcomplexity", # 10690
-                                                    "Heattreatspecbins" = "heattreatspecbins", # character 13
-                                                    "Cleaning Spec"="cleaningspec", # character 20
+                                                    "Balance"="balance", # 19
+                                                    "Box Volume"="boxvol", # 9622
                                                     "Brazed Welded Spec Bins"="brazedweldedspecbins", # character 2
+                                                    "Cleaning Spec"="cleaningspec", # character 20
+                                                    "Core Volume"="corevol", # 10073
+                                                    "Demand" = "transformed.demand", # 766 
+                                                    "Depth"="depth", # 6408
+                                                    "Drill Holes"= "drillholes", # integer 136
+                                                    "Drill Hole Volume"="drillholevol", # 6318  
+                                                    "Ex Gear Count"="exgearcount", # integer 6
+                                                    "Heattreatspecbins" = "heattreatspecbins", # character 13
+                                                    "Height"="height", # 7630
                                                     "Matspecbins" = "matspecbins", # character 40
-                                                    "Demand" = "transformed.demand") # 766                   
-                                                    ),
+                                                    "Mold Complexity" = "moldcomplexity", # 10690
+                                                    "Number of Ports"="ports", # integer 13
+                                                    "Parting Line Perimeter"="partinglineperim", # 8724                              
+                                                    "Port Volume"="portvol", # 210?
+                                                    "Surface Area"= "surfacea", # 10074
+                                                    "Water Pressure Test"="pressuretestwater", # integer 26
+                                                    "Weight"="weight", # 8663                               
+                                                    "Width"="width") # 7137                  
+                                                    ),  
           wellPanel(
+          h5("Filtering:"),
           selectInput("family", "Family", families),
           
-          selectInput("rsf", "Filter by RSF?", list("Do Not Filter by RSF", "F", "R")),
+          selectInput("rsf", "RSF", list("Do Not Filter by RSF", "F", "R"))),
           
           checkboxInput("logy", "Log Transformation of Price", TRUE),
-          
-          #conditionalPanel(condition= "input.variable in transformx",
-                           checkboxInput("logx", "Transformation of X", FALSE)#,
-          #                 #sliderInput("n", "Bin Width", value = 2, min = 1, max = 100)
-          #                 )
-                    )),    
+          uiOutput("binwidth")
+          ),  
        
         mainPanel(
           tabsetPanel(
               tabPanel("Plot", plotOutput("Plot")),
-              tabPanel("Summary", h5(textOutput("caption")), verbatimTextOutput("Summary"), tableOutput("Table"))
+              tabPanel("Summary", h5(textOutput("caption")), verbatimTextOutput("Summary"), plotOutput("Histogram"), tableOutput("Table"))
                   ))
 ))
