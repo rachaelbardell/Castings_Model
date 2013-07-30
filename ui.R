@@ -8,10 +8,6 @@ families <- table(priceData$family)
 families <- families[families > 30]
 families <- c("Do Not Filter by Family", names(families))
 
-#test <- apply(priceData[,1:ncol(priceData)], 2, function(X)length(unique(X)) < 200)
-# return a list of variables that have more than 200 unique outcomes
-#transformx <- sapply(names(priceData), function(x)if(test[[x]]=="FALSE") x)
-
 shinyUI(pageWithSidebar(
        headerPanel("Castings Model"),
         
@@ -48,7 +44,8 @@ shinyUI(pageWithSidebar(
           selectInput("rsf", "RSF", list("Do Not Filter by RSF", "F", "R"))),
           
           checkboxInput("logy", "Log Transformation of Price", TRUE),
-          uiOutput("binwidth")
+          
+          uiOutput("bin_or_logx") # slider bar for binwith or check box for log(x) transformation 
           ),  
        
         mainPanel(
