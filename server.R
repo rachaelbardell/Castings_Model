@@ -3,6 +3,8 @@ library(ggplot2)
 library(caret)
 library(corrplot)
 
+priceData <- subset(parts.df, parts.df$inModel, price >= 0)
+
 # Returns true/false for each column in the data frame
 # For graphing purposes, if there are more than 200 unique values the variable 
 # is treated as continuous, less than 200 will be treated as categorical
@@ -15,8 +17,6 @@ binSlider <- c("exgearcount", "pressuretestair", "balance", "drillholes", "ports
 shinyServer(function(input, output) {
   
   dataInput <- reactive({
-          
-        priceData <- subset(parts.df, parts.df$inModel, price >= 0)
           
         if(input$family != "Do Not Filter by Family") {
         priceData <- subset(priceData, priceData$family == input$family)}
@@ -74,7 +74,7 @@ shinyServer(function(input, output) {
         priceData <- dataInput()
         if(!test[[input$variable]] && input$transx) {trans <- BoxCoxTrans(priceData[, input$variable]) 
               priceData[, input$variable] <- predict(trans, priceData[, input$variable])}
-        p <- ggplot(priceData)+geom_histogram(aes_string(x=input$variable))+ggtitle(paste("Histogram of " ,input$variable))
+        p <- ggplot(priceData)+geom_histogram(aes_string(x=input$variable))#+ggtitle(paste("Histogram of " ,input$variable))
         print(p)
     })
   
