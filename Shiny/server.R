@@ -3,7 +3,7 @@ library(ggplot2)
 library(caret)
 library(corrplot)
 
-priceData <- read.csv("~/var/shiny-server/Castings_Model/castings_data.csv", header = TRUE, stringsAsFactors=FALSE)
+priceData <- read.csv("/var/shiny-server/Shiny/castings_data.csv", header = TRUE, stringsAsFactors=FALSE)
 
 priceData <- subset(priceData, parts.df$inModel, price >= 0)
 
