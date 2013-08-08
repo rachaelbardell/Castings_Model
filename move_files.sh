@@ -1,1 +1,1 @@
-cp -a Castings_Model /var/shiny-server/www
+cp -a Shiny /var/shiny-server/www
