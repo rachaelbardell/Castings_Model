@@ -112,4 +112,4 @@ shinyServer(function(input, output) {
 })
 
 # run the castings model app with the following code
-# runApp("~/location/server.R/and/ui.R/are/saved")
+# runApp("~/Documents/Intern_Model/Castings_Model")

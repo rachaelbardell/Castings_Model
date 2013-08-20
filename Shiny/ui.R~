@@ -63,3 +63,6 @@ shinyUI(pageWithSidebar(
           tabPanel("Summary", h5(textOutput("caption")), verbatimTextOutput("Summary"), plotOutput("Histogram"), tableOutput("Table"))
     ))
 ))
+
+# when we pick a model... residual plot, pred vs actual, var vs residual, etc?
+# y transformation only when it can be used
