@@ -3,8 +3,10 @@ library(ggplot2)
 library(caret)
 library(corrplot)
 
+dir <- "~/Desktop/Intern_Model/"
+
 priceData <- read.csv("/var/shiny-server/www/Shiny/castings_data.csv", header = TRUE, stringsAsFactors=FALSE)
-# priceData <- read.csv("~/Desktop/Intern_Model/052113_intern_model/castings_data.csv, header = TRUE, stringsAsFactors = FALSE)
+# priceData <- read.csv(paste0(dir, "castings_data.csv", header = TRUE, stringsAsFactors = FALSE)
 priceData <- subset(priceData, priceData$inModel, price >= 0)
 
 # Returns true/false for each column in the data frame
@@ -70,7 +72,7 @@ shinyServer(function(input, output) {
         if(!test[[input$variable]]) return(checkboxInput("transx", "Box Cox Transformation of X", FALSE))
                                     })
   
-  # histogram of the input variable
+  # histogram/bar_chart of the input variable
   output$Histogram <- renderPlot({
         priceData <- dataInput()
         if(!test[[input$variable]] && input$transx) {trans <- BoxCoxTrans(priceData[, input$variable])
@@ -112,4 +114,4 @@ shinyServer(function(input, output) {
 })
 
 # run the castings model app with the following code
-# runApp("~/location/server.R/and/ui.R/are/saved")
+# runApp("~/location/of/server.R/and/ui.R")

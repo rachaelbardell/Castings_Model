@@ -60,9 +60,6 @@ shinyUI(pageWithSidebar(
           tabsetPanel(
           tabPanel("Plot", plotOutput("Plot"), verbatimTextOutput("lambda")),
           tabPanel("Diagnostics", h5("Correlation Matrix"), plotOutput("Correlation")),
-          tabPanel("Summary", h5(textOutput("caption")), verbatimTextOutput("Summary"), plotOutput("Histogram"), tableOutput("Table"))
+          tabPanel("Summary", h5(textOutput("caption")), verbatimTextOutput("Summary"), plotOutput("BarChart"), tableOutput("Table"))
     ))
 ))
-
-# when we pick a model... residual plot, pred vs actual, var vs residual, etc?
-# y transformation only when it can be used
